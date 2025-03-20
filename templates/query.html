@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}知识图谱查询结果{% endblock %}
+{% block content %}
+<h1>知识图谱查询结果</h1>
+<p>查询类型：{{ query_type }}，名称：{{ name }}</p>
+{% if results %}
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>诗词标题</th>
+            <th>类别</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in results %}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.category }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>没有查询到相关结果。</p>
+{% endif %}
+<p><a href="/">返回首页</a></p>
+{% endblock %}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>AI 诗词生成对话</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #chat-box { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; white-space: pre-wrap; }
+        .message { margin: 10px 0; }
+        .user { color: blue; }
+        .ai { color: green; }
+        input[type="text"] { width: 70%; padding: 5px; margin-right: 10px; }
+        button { padding: 5px 10px; }
+    </style>
+</head>
+<body>
+    <h1>AI 诗词生成对话</h1>
+    <div id="chat-box">
+        <!-- 对话记录显示区域 -->
+    </div>
+    <form id="chat-form">
+        <input type="text" id="user-input" placeholder="请输入诗词主题或关键词" autocomplete="off">
+        <button type="submit">生成诗词</button>
+    </form>
+    <script>
+        const form = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatBox = document.getElementById('chat-box');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const message = userInput.value.trim();
+            if (!message) return;
+            // 显示用户消息
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = "我：" + message;
+            chatBox.appendChild(userMsg);
+            userInput.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // 发送到后端 AI 接口，获取生成的诗词
+            fetch('/ai', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'message ai';
+                aiMsg.textContent = "AI：" + data.reply;
+                chatBox.appendChild(aiMsg);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

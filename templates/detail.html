@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>{{ poem.title }} - 详情</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        .poem { margin-top: 20px; }
+        .back { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>{{ poem.title }}</h1>
+    <h2>作者：{{ poem.author }}</h2>
+    <div class="poem">
+        {% for line in poem.paragraphs %}
+            <p>{{ line }}</p>
+        {% endfor %}
+    </div>
+    <div class="back">
+        <a href="{{ url_for('index', poem_type=category) }}">返回查询</a>
+    </div>
+</body>
+</html>

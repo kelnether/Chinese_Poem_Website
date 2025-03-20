@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}诗词查询{% endblock %}
+{% block content %}
+<h1>诗词查询</h1>
+<form method="get" action="/">
+    <label for="poem_type">选择诗词类别:</label>
+    <select name="poem_type" id="poem_type">
+        {% for category in categories %}
+        <option value="{{ category }}" {% if category == poem_type %}selected{% endif %}>{{ category }}</option>
+        {% endfor %}
+    </select>
+    <label for="search">搜索关键词:</label>
+    <input type="text" name="search" id="search" value="{{ search_query }}">
+    <button type="submit">查询</button>
+</form>
+
+<h2>统计信息 ({{ poem_type }})</h2>
+<p>总诗词数：{{ stats.total }}</p>
+<p>诗人数量：{{ stats.unique_authors }}</p>
+<h3>热门诗人（前5）：</h3>
+<ul>
+    {% for author, count in stats.top_authors %}
+    <li>{{ author }}：{{ count }} 首</li>
+    {% endfor %}
+</ul>
+
+{% if search_query %}
+<h2>搜索结果：{{ search_query }}</h2>
+<p>共找到 {{ results|length }} 首诗词。</p>
+<ul>
+    {% for idx, poem in results %}
+    <li>
+        <strong>{{ poem.title }}</strong> - {{ poem.author }}<br>
+        <a href="{{ url_for('poem_detail', category=poem_type, idx=idx) }}">查看详情</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
