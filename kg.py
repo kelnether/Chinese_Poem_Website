@@ -15,7 +15,8 @@ def extract_keywords(text, topK=3):
     keywords = [w for w in words if len(w) > 1][:topK]
     return keywords
 
-def update_knowledge_graph(poetry_data, neo4j_url="bolt://localhost:7687", neo4j_auth=("neo4j", "20031129")):
+def update_knowledge_graph(poetry_data, neo4j_url="bolt://localhost:7687",
+                           neo4j_auth=("neo4j", "your_password")):
     """
     将诗词知识数据写入 Neo4j 图数据库，建立 Author、Poem、Keyword 节点及关系。
     """

@@ -14,7 +14,7 @@ def generate_poem(prompt):
     """
     api_key = os.environ.get("OPENAI_API_KEY")
     # 示例中直接写入 api_key（建议配置为环境变量）
-    api_key = "sk-ff81ddd218354252a57622881af85bb8"
+
     if not api_key:
         return "未设置 OPENAI_API_KEY，请在环境变量中配置。"
 
@@ -26,6 +26,7 @@ def generate_poem(prompt):
                 {"role": "system", "content": f"请根据{prompt}写一首古诗词，"},
                 {"role": "user", "content": f"请根据{prompt}写一首古诗词"}
             ],
+            temperature=1.5,
             stream=False
         )
         poem = response.choices[0].message.content
