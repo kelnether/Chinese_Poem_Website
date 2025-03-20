@@ -11,7 +11,7 @@ This project is a Flask-based web application designed for managing, querying, a
   View detailed information for individual poems along with statistics such as total poems, unique authors, and top authors based on the number of poems.
 
 - **AI-Powered Poetry Generation:**  
-  A dedicated chat page allows users to enter a prompt (theme or keyword) and generates a custom Chinese poem using OpenAI¡¯s GPT-based API.
+  A dedicated chat page allows users to enter a prompt (theme or keyword) and generates a custom Chinese poem using OpenAIÂ¡Â¯s GPT-based API.
 
 - **Knowledge Graph Integration:**  
   The project builds a knowledge graph using Neo4j to capture relationships between:
@@ -45,7 +45,7 @@ pip install -r requirements.txt
 (Make sure to run this command in your virtual environment.)
 
 ### Configure Environment Variables
-Set your OpenAI API key:
+Set your OpenAI API key to os env:
 ```bash
 export OPENAI_API_KEY="your_openai_api_key"
 ```
